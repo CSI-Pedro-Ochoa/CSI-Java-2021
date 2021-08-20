@@ -168,15 +168,15 @@ Select `upstream/main`
 
 What is the difference between Git and GitHub?
 
- - Answer:
+ - Answer: git is a process where u push and pull, github is the website where u can do it
 
 What is the difference between a git commit and a git push?
 
- - Answer:
+ - Answer: A git commit us putting files in a space before pushing, push is   when u take all the files in your commit and push them to your repository
 
 What is the difference between a pull, and an upstream pull?
 
- - Answer:
+ - Answer: A pull moves the files from your repositary to your local, an upstream pull takes from another repository to yours.
 
 Was any part of these instructions unclear or incomplete?
 

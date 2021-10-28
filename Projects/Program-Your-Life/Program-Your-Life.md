@@ -74,7 +74,7 @@
     * invested
   * Sum your starting amount to your cash.
 ```java
-        cash = 0.0;
+        double cash = 0.0;
         double startingAmount = 1_000;
         cash += startingAmount;
 ```
@@ -150,6 +150,15 @@ else if(i<55) {
         cash -= rent;
         cash -= carAndExpenses;
 }
+
+```
+
+<br>
+
+### Add a print at the end of your print
+```java
+
+System.out.println("Balance at age: " + i + " is: " + cash + " with a debt of " + debt + " and " + invested + " invested." );
 
 ```
 

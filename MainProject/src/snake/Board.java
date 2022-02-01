@@ -20,8 +20,8 @@ import javax.swing.Timer;
 
 public class Board extends JPanel implements ActionListener {
 
-    private final int B_WIDTH = 1000;
-    private final int B_HEIGHT = 1000;
+    private final int B_WIDTH = 800;
+    private final int B_HEIGHT = 800;
     private final int DOT_SIZE = 50;
     private final int ALL_DOTS = 50;
     private final int RAND_POS = 10;
@@ -33,7 +33,7 @@ public class Board extends JPanel implements ActionListener {
     private int dots;
     private int apple_x;
     private int apple_y;
-    private int score;
+    private int score = 0;
    
 
     private boolean leftDirection = false;
@@ -46,6 +46,7 @@ public class Board extends JPanel implements ActionListener {
     private Image ball;
     private Image apple;
     private Image head;
+    private Image background;
 
     public Board() {
         
@@ -61,18 +62,25 @@ public class Board extends JPanel implements ActionListener {
         setPreferredSize(new Dimension(B_WIDTH, B_HEIGHT));
         loadImages();
         initGame();
+        
+        
+        
+        
     }
 
     private void loadImages() {
 
-        ImageIcon iid = new ImageIcon("src/resources/reddot.png");
+        ImageIcon iid = new ImageIcon("src/resources/red dot.png");
         ball = iid.getImage();
 
         ImageIcon iia = new ImageIcon("src/resources/eggplant.png");
         apple = iia.getImage();
 
-        ImageIcon iih = new ImageIcon("src/resources/oldguy.png");
+        ImageIcon iih = new ImageIcon("src/resources/the rock.png");
         head = iih.getImage();
+        
+        ImageIcon back = new ImageIcon("src/resources/background.png");
+        background = back.getImage();
     }
 
     private void initGame() {
@@ -93,11 +101,12 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
-
+        
+        g.drawImage(background, 0, 0, null);
         doDrawing(g);
     }
     
-    private void doDrawing(Graphics g) {
+ private void doDrawing(Graphics g) {
         
         if (inGame) {
 
@@ -110,26 +119,36 @@ public class Board extends JPanel implements ActionListener {
                     g.drawImage(ball, x[z], y[z], this);
                 }
             }
-
-            
             scoreboard(g);
+
             Toolkit.getDefaultToolkit().sync();
 
         } else {
-
+        	
             gameOver(g);
         }        
     }
 
+
     private void gameOver(Graphics g) {
         
-        String msg = "Game Over";
-        Font small = new Font("Helvetica", Font.BOLD, 14);
+    	String msg = "Game Over";
+        Font small = new Font("Helvetica", Font.ITALIC, 100);
         FontMetrics metr = getFontMetrics(small);
 
         g.setColor(Color.white);
         g.setFont(small);
         g.drawString(msg, (B_WIDTH - metr.stringWidth(msg)) / 2, B_HEIGHT / 2);
+        
+        
+        String msgB = "    					                                   click enter to live";
+        Font smallB = new Font("Helvetica", Font.ITALIC, 30);
+        FontMetrics metrB = getFontMetrics(smallB);
+
+        g.setColor(Color.white);
+        g.setFont(smallB);
+        g.drawString(msgB, (B_WIDTH - metr.stringWidth(msgB)) / 30 * 2 /30 , B_HEIGHT * 2 / 3);
+        
     }
 
     private void checkApple() {
@@ -139,11 +158,23 @@ public class Board extends JPanel implements ActionListener {
             dots++;
             score++;
             locateApple();
-          
-  
         }
     }
+    
+    public void restart() {
 
+    	inGame = true;
+    	initGame();
+    	score = 0;
+    	
+    	 rightDirection = true;
+         upDirection = false;
+         downDirection = false;
+         leftDirection = false;
+
+    	
+    	
+    }
     private void move() {
 
         for (int z = dots; z > 0; z--) {
@@ -167,18 +198,15 @@ public class Board extends JPanel implements ActionListener {
             y[0] += DOT_SIZE;
         }
     }
-
+   
     private void checkCollision() {
 
-        for (int z = dots; z > 0; z--) {
+    	for (int z = dots; z > 0; z--) {
 
-            if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
-                inGame = false;
-            }
-            
-           
-            
-        }
+    	    if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
+    	        inGame = false;
+    	    }
+    	}
 
         if (y[0] >= B_HEIGHT) {
             inGame = false;
@@ -213,8 +241,6 @@ public class Board extends JPanel implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-   
-
         if (inGame) {
 
             checkApple();
@@ -224,7 +250,6 @@ public class Board extends JPanel implements ActionListener {
 
         repaint();
     }
-
     
 private void scoreboard(Graphics g) {
         
@@ -274,7 +299,26 @@ private void scoreboard(Graphics g) {
                 downDirection = true;
                 rightDirection = false;
                 leftDirection = false;
+                
+                if ((key == KeyEvent.VK_ENTER && (!inGame))) {
+                	restart();
             }
         }
     }
 }
+}
+
+//private void loadImages() {
+//
+//    ImageIcon iid = new ImageIcon("src/resources/red dot.png");
+//    ball = iid.getImage();
+//
+//    ImageIcon iia = new ImageIcon("src/resources/eggplant.png");
+//    apple = iia.getImage();
+//
+//    ImageIcon iih = new ImageIcon("src/resources/the rock.png");
+//    head = iih.getImage();
+//    
+//    ImageIcon back = new ImageIcon("src/resources/background.png");
+//    background = back.getImage();
+//}

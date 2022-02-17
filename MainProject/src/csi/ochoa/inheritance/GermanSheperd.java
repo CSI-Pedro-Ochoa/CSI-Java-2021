@@ -1,6 +1,7 @@
 package csi.ochoa.inheritance;
 
-	
+import javax.swing.ImageIcon;
+
 public class GermanSheperd extends Dog{
 
 		public GermanSheperd() {
@@ -8,7 +9,8 @@ public class GermanSheperd extends Dog{
 			this.size = 50;
 			this.wild = false;
 			this.hair = "brown";
-			this.gender = "female";
+			this.gender = false;
+			this.icon = new ImageIcon(getClass().getResource("terrier.jpeg"));
 		}
 		
 		

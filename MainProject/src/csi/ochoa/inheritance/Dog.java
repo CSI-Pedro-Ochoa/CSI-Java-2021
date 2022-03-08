@@ -17,15 +17,13 @@ public class Dog {
 			
 			
 		}  
-		
-		
 		public Dog(String hair, int size, boolean wild, boolean gender, String directory) {
 			super();
 			this.hair = hair;
 			this.size = size;
 			this.wild = wild;
 			this.gender = gender;
-			this.icon = new ImageIcon(getClass().getResource(directory));
+			this.icon = new ImageIcon(new ImageIcon(getClass().getResource(directory)).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
 		}
 
 
@@ -36,9 +34,7 @@ public class Dog {
 					System.out.println("Raise leg");
 				}
 				System.out.println("tsssss");
-			}
-			
-			
+			}	
 		}
 		
 		public void die() {
@@ -49,7 +45,10 @@ public class Dog {
 			
 		}
 		
-		
+		public void grow() {
+			
+			
+		}
 		
 		
 		public class Shit {

@@ -3,10 +3,6 @@ package csi.ochoa.inheritance;
 import java.awt.EventQueue;
 import javax.swing.JFrame;
 
-
-
-
-
 	public class Simulation extends JFrame {
 
 	    public Simulation() {
@@ -16,7 +12,7 @@ import javax.swing.JFrame;
 	    
 	    private void initUI() {
 	        
-	        add(new Simulation());
+	        add(new DogPound());
 	        
 	        setResizable(false);
 	        pack();

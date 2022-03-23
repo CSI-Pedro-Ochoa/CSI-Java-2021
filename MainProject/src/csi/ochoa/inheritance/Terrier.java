@@ -10,6 +10,7 @@ public class Terrier extends Dog{
 		
 	}
 	
+
 	@Override
 	public Noise bark(Noise n) {
 

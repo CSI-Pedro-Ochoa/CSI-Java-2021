@@ -23,6 +23,7 @@ import javax.swing.Timer;
 public class DogPound extends JPanel implements ActionListener {
 
 	List<Dog> dogs = new ArrayList<Dog>();
+	List<Dog.Food> food = new ArrayList<Dog.Food>();
 
 	private int B_WIDTH = 800;
 	private int B_HEIGHT = 800;
@@ -39,12 +40,13 @@ public class DogPound extends JPanel implements ActionListener {
 	private boolean isRunning = true;
 
 	private Timer timer;
-//	public boolean nextBoolean() {
+	
+
 	
 
 	public DogPound() {
 
-		dogs.add(new Terrier());
+		
 
 		initDogPound();
 	}
@@ -64,23 +66,17 @@ public class DogPound extends JPanel implements ActionListener {
 
 	}
 
-//   public void loadImages() {
-//
-//        ImageIcon iid = new ImageIcon(getClass().getResource("Terrier.png"));
-//        terrier = iid.getImage().getScaledInstance(120, 120,  java.awt.Image.SCALE_SMOOTH);
-//        iid = new ImageIcon(terrier);
-//        
-//   }
 
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-//        g.drawImage(background, 0, 0, null);
+
 		doDrawing(g);
 	}
 
 	private void doDrawing(Graphics g) {
+		
 		if (isRunning) {
 			for (int z = 0; z < dogs.size(); z++) {
 
@@ -89,40 +85,86 @@ public class DogPound extends JPanel implements ActionListener {
 			}
 			Toolkit.getDefaultToolkit().sync();
 		}
+		
+		if (isRunning) {
+			for (int z = 0; z < food.size(); z++) {
+
+					g.drawImage(food.get(z).icon.getImage(), x[z], y[z], this);
+
+			}
+			Toolkit.getDefaultToolkit().sync();
+		}
 
 	}
 	
+	private void checkFood() {
+		   
+		   for(Dog.Food f : food) {
+	    		
+	    		if ((x[0] == f.food_x) && (y[0] == f.food_y)) {
+	            	
+	    			
+	            	
+	            }
+	    	}
+	        
+	   }
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+	if (isRunning) {
 		move();
-		repaint();
         checkCollision();
+        checkFood();
 
+	}
+	
+	repaint();
+	
 	}
 
 	 private void checkCollision() {
 
-	    	for (int z = dogs.size(); z > 0; z--) {
+			for (int z = dogs.size(); z > 0; z--) {
 
-    	   
+	    	    if ((z > 4) && (x[0] == x[z]) && (y[0] == y[z])) {
+	    	        isRunning = false;
+	    	    }
 	    	}
+			Random rd = new Random();
 
-	        if (y[0] >= B_HEIGHT) {
-	            rightDirection = false;
+			if (y[0] >= B_HEIGHT) {
+
+	        	upDirection = rd.nextBoolean();
+                rightDirection = rd.nextBoolean();
+                leftDirection = rd.nextBoolean();
+                downDirection = false;
 	        }
 
 	        if (y[0] < 0) {
-	        	leftDirection = false;
+
+	        	leftDirection = rd.nextBoolean();
+                upDirection = false;
+                downDirection = rd.nextBoolean();
+                rightDirection = rd.nextBoolean();
 	        }
 
 	        if (x[0] >= B_WIDTH) {
-	        	upDirection = false;
-	        }
 
-	        if (x[0] < 0) {
-	        	downDirection = false;
+	        	upDirection = rd.nextBoolean();
+                rightDirection = false;
+                leftDirection = rd.nextBoolean();
+                downDirection = rd.nextBoolean();
 	        }
 	        
+	        if (x[0] < 0) {
+	           
+	        	leftDirection = false;
+                upDirection = rd.nextBoolean();
+                downDirection = rd.nextBoolean();
+                rightDirection = rd.nextBoolean();
+	        }
 	       
 	    }
 	
@@ -131,37 +173,11 @@ public class DogPound extends JPanel implements ActionListener {
 		@Override
 		public void keyPressed(KeyEvent e) {
 
-//			int key = e.getKeyCode();
-//
-//			if ((key == KeyEvent.VK_LEFT) && (!rightDirection)) {
-//				leftDirection = true;
-//				upDirection = false;
-//				downDirection = false;
-//			}
-//
-//			if ((key == KeyEvent.VK_RIGHT) && (!leftDirection)) {
-//				rightDirection = true;
-//				upDirection = false;
-//				downDirection = false;
-//			}
-//
-//			if ((key == KeyEvent.VK_UP) && (!downDirection)) {
-//				upDirection = true;
-//				rightDirection = false;
-//				leftDirection = false;
-//			}
-//
-//			if ((key == KeyEvent.VK_DOWN) && (!upDirection)) {
-//				downDirection = true;
-//				rightDirection = false;
-//				leftDirection = false;
-//
-//			}
+
 		}
 	}
 	
 
-	
 	
 	 private void move() {
 

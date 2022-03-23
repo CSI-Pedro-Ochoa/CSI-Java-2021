@@ -100,10 +100,25 @@ public class Dog {
 			public Food(String flavor, String color, boolean humanFood) {
 				
 			}
+			
 			String flavor;
 			String color;
 			boolean humanFood;
+			ImageIcon icon;
+			 int food_x;
+			 int food_y;
+			
+			
+			public void Food (String flavor, String color,  boolean humanfood, int food_y, int food_x) {
+				this.flavor = flavor;
+				this.color = color;
+				this.humanFood = humanfood;
+				this.icon = new ImageIcon(new ImageIcon(getClass().getResource("dogfood.jpeg")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
+				this.food_x = food_x;
+				this.food_y = food_y;
+			
 		}
+		
 		
 		
 		public Shit eat(Food f) {
@@ -118,7 +133,13 @@ public class Dog {
 			return new Noise(n.decibels, n.recurring);
 		}
 
-	}
+		}
+
+		public Noise bark(Noise n) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+}
 	
 
 

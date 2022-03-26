@@ -19,11 +19,15 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import csi.ochoa.inheritance.Dog.Shit;
+
 
 public class DogPound extends JPanel implements ActionListener {
 
 	List<Dog> dogs = new ArrayList<Dog>();
 	List<Dog.Food> food = new ArrayList<Dog.Food>();
+	List<Dog.Shit> shit = new ArrayList<Dog.Shit>();
+	List<Dog.Piss> piss = new ArrayList<Dog.Piss>();
 
 	private int B_WIDTH = 800;
 	private int B_HEIGHT = 800;
@@ -77,31 +81,69 @@ public class DogPound extends JPanel implements ActionListener {
 
 	private void doDrawing(Graphics g) {
 		
-		if (isRunning) {
+
 			for (int z = 0; z < dogs.size(); z++) {
 
 					g.drawImage(dogs.get(z).icon.getImage(), x[z], y[z], this);
 
 			}
 			Toolkit.getDefaultToolkit().sync();
-		}
 		
-		if (isRunning) {
+
 			for (int z = 0; z < food.size(); z++) {
 
-					g.drawImage(food.get(z).icon.getImage(), x[z], y[z], this);
+					g.drawImage(food.get(z).icon.getImage(), food.get(z).food_x, food.get(z).food_y, this);
 
 			}
 			Toolkit.getDefaultToolkit().sync();
+			
+			for (int z = 0; z < shit.size(); z++) {
+
+				g.drawImage(shit.get(z).icon.getImage(), shit.get(z).shit_x, shit.get(z).shit_y, this);
+
 		}
+		Toolkit.getDefaultToolkit().sync();
+		
 
 	}
 	
 	private void checkFood() {
+		
+		Random rd = new Random();
+		
+		if(food.size() < 3) {
+			
+		food.add(new Dog().new Food(rd.nextInt(500),rd.nextInt(500)));
+			
+		}
+		
 		   
 		   for(Dog.Food f : food) {
 	    		
 	    		if ((x[0] == f.food_x) && (y[0] == f.food_y)) {
+	            	
+	    			
+	            	
+	            }
+	    	}
+	        
+	   }
+	
+	
+private void checkShit() {
+		
+		Random rd = new Random();
+		
+		if(shit.size() < 1) {
+			
+		shit.add(new Dog().new Shit(rd.nextInt(500),rd.nextInt(500)));
+			
+		}
+		
+		   
+		   for(Dog.Shit s : shit) {
+	    		
+	    		if ((x[0] == s.shit_x) && (y[0] == s.shit_y)) {
 	            	
 	    			
 	            	
@@ -117,6 +159,7 @@ public class DogPound extends JPanel implements ActionListener {
 		move();
         checkCollision();
         checkFood();
+        checkShit();
 
 	}
 	
@@ -203,7 +246,7 @@ public class DogPound extends JPanel implements ActionListener {
 	        }
 	        
 	        
-	   	 Random rd = new Random(); // creating Random object
+	   	 Random rd = new Random(); 
 
 	     if(rd.nextInt(5) == 3) {
 			leftDirection = rd.nextBoolean();

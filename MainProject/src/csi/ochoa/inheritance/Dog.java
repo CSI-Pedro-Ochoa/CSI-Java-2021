@@ -53,23 +53,22 @@ public class Dog {
 		
 		public class Shit {
 
-			boolean soft;
-			int size;
-			String shape;
+	
+			ImageIcon icon;
+			int shit_x;
+			int shit_y;
 			
 			
-			public Shit() {
+			public Shit(int shit_x, int shit_y) {
 
+				this.icon = new ImageIcon(new ImageIcon(getClass().getResource("Shit.jpeg")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
+				this.shit_x = shit_x;
+				this.shit_y = shit_y;	
+				
 			}
 			
-			public Shit(boolean hard, int size, String shape) {
-				super();
-				this.soft = soft;
-				this.size = size;
-				this.shape = shape;
-			}
-
-
+			
+										
 		}
 		
 		public void mate(Dog D) {
@@ -101,30 +100,35 @@ public class Dog {
 				
 			}
 			
-			String flavor;
-			String color;
-			boolean humanFood;
+			
 			ImageIcon icon;
 			 int food_x;
 			 int food_y;
 			
 			
-			public void Food (String flavor, String color,  boolean humanfood, int food_y, int food_x) {
-				this.flavor = flavor;
-				this.color = color;
-				this.humanFood = humanfood;
+			public Food (int food_y, int food_x) {
 				this.icon = new ImageIcon(new ImageIcon(getClass().getResource("dogfood.jpeg")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
 				this.food_x = food_x;
 				this.food_y = food_y;
 			
 		}
 		
+			public class Piss {
+
+				
+				ImageIcon icon;
+				int piss_x;
+				int piss_y;
+				
+				
+				public Piss(int piss_x, int piss_y) {
+
+					this.icon = new ImageIcon(new ImageIcon(getClass().getResource("piss.jpeg")).getImage().getScaledInstance(100, 100,  java.awt.Image.SCALE_SMOOTH));
+					this.piss_x = piss_x;
+					this.piss_y = piss_y;	
 		
 		
-		public Shit eat(Food f) {
-			
-			return new Shit();
-		}
+				}
 		
 	
 		public Noise bark(Noise n) {

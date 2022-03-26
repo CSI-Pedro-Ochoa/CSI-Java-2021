@@ -24,8 +24,5 @@ public class Terrier extends Dog{
 		
 	}
 	
-	public Shit eat() {
-
-		return new Shit(true, 3, "Apple");
-	}
+	
 }
